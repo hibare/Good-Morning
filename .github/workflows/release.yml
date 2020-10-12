@@ -5,8 +5,7 @@ name: Publish Releases to Hub
 # Only trigger on semver shaped tags.
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches: main
 
 jobs:
   docker:
