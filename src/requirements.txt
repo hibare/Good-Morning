@@ -1,0 +1,7 @@
+beautifulsoup4==4.9.3
+geographiclib==1.50
+geopy==2.0.0
+lxml==4.5.2
+python-decouple==3.3
+pytz==2020.1
+soupsieve==2.0.1
