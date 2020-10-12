@@ -1,5 +1,6 @@
 import logging
 from decouple import config, Csv
+from apscheduler.schedulers.blocking import BlockingScheduler
 from google_news import GoogleNews
 from open_weather import OpenWeatherAPI
 from slack_notification import send_notification
@@ -9,7 +10,10 @@ logging.basicConfig(format='%(asctime)s [%(filename)s:%(funcName)s:%(lineno)d] [
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG) 
 
-def main():
+# Create a blocking scheduler
+sched = BlockingScheduler(timezone=config('TIMEZONE'))
+
+def run():
     logger.info("Starting program")
 
 
@@ -129,4 +133,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sched.add_job(run, trigger='cron', hour='6', minute='0', id="get_things", replace_existing=True)
+    logger.info("Job scheduled")
+    
+    sched.start()
+    
