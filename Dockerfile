@@ -1,16 +1,21 @@
-FROM python:3.9-alpine as base
+FROM alpine:latest as build
 
-FROM base as builder
-RUN mkdir /install
-WORKDIR /install
+RUN apk add libxml2-dev libxslt-dev python3-dev gcc build-base
+
+RUN python3 -m venv /opt/venv
+
+ENV PATH="/opt/venv/bin:$PATH"
 
 COPY requirements.txt /requirements.txt
 
-RUN pip install --install-option="--prefix=/install" -r /requirements.txt
+RUN pip install -r /requirements.txt
 
-FROM base
+FROM alpine:latest as release
 
-COPY --from=builder /install /usr/local
+COPY --from=build /opt/venv /opt/venv
+
+ENV PATH="/opt/venv/bin:$PATH"
+
 COPY src /app
 
 WORKDIR /app
