@@ -1,6 +1,6 @@
 FROM python:3.9-alpine as build
 
-RUN apk add libxml2-dev libxslt-dev gcc
+RUN apk add libxml2-dev libxslt-dev gcc libc-dev
 
 RUN python3 -m venv /opt/venv
 
