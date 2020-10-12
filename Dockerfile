@@ -20,4 +20,4 @@ COPY src /app
 
 WORKDIR /app
 
-CMD ["python", "runner.py"]
+ENTRYPOINT ["/opt/venv/bin/python", "runner.py"]
