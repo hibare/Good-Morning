@@ -106,4 +106,3 @@ class GoogleNews:
             )
 
         return result
-

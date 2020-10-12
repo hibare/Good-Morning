@@ -46,6 +46,35 @@ def main():
             
             send_notification(text)
 
+    news_location = config('NEWS_LOCATION')
+    n_result = news.by_location()
+
+    if n_result.get("status"):
+        text = {
+            "blocks": [
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": ":newspaper: Daily News dose from `%s`." % (n_result.get("country"))
+                    }
+                }
+            ]
+        }
+
+        for _ in n_result.get("news"):
+            text["blocks"].append({
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*<%s|%s>*\n" % (_.get("link"), _.get("title"))
+                }
+            })
+        
+        send_notification(text)
+    else:
+        logger.exception("Failed to fetch news")
+
             
     # Process Weather
     weather_cities = config('WEATHER_CITIES', cast=Csv())
