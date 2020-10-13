@@ -1,4 +1,4 @@
-# Good-Morning
+# Good-Morning :sunny:
 
 A :robot: bot which produces your daily Morning dose.
 
