@@ -1,6 +1,6 @@
-FROM python:3.9-alpine as build
+FROM alpine:latest as build
 
-RUN apk add libxml2-dev libxslt-dev gcc libc-dev
+RUN apk add libxml2-dev libxslt-dev gcc libc-dev python3-dev
 
 RUN python3 -m venv /opt/venv
 
@@ -10,7 +10,7 @@ COPY requirements.txt /requirements.txt
 
 RUN pip install -r /requirements.txt
 
-FROM python:3.9-alpine as release
+FROM alpine:latest as release
 
 COPY --from=build /opt/venv /opt/venv
 
