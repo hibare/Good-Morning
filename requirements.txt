@@ -7,7 +7,7 @@ geopy==2.0.0
 lxml==4.9.1
 python-decouple==3.3
 pytz==2020.1
-requests==2.24.0
+requests==2.31.0
 soupsieve==2.0.1
 tzlocal==2.1
 urllib3==1.26.5
